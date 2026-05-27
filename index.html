@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Видение через сюжетные Арки · Дмитрий Филиппов</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Unbounded:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f6f1e7; --paper-2:#fbf8f1; --card:#fffdf8;
+  --ink:#23292b; --ink-soft:#55605f; --ink-faint:#8a938f;
+  --line:#e2d9c8; --line-2:#ece3d4;
+  --brass:#a8761f; --brass-deep:#8a5f15; --brass-wash:#f4ead4;
+  --teal:#1d6b5c; --teal-deep:#155244; --teal-wash:#e2efea;
+  --coral:#bb4a32; --coral-wash:#f7e7e1;
+  --key:#dc2626;
+  --mono:ui-monospace,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace;
+  --r:18px;
+  --shadow:0 1px 2px rgba(60,45,15,.04),0 10px 34px rgba(60,45,15,.07);
+  --shadow-lg:0 20px 60px rgba(60,45,15,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);background-image:linear-gradient(rgba(168,118,31,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(168,118,31,.045) 1px,transparent 1px);background-size:40px 40px;color:var(--ink);font-family:'Hanken Grotesk',sans-serif;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.wrap{max-width:1080px;margin:0 auto;padding:0 30px;position:relative}
+.display{font-family:'Hanken Grotesk',sans-serif;font-weight:800;line-height:1.08;letter-spacing:-.022em}
+.muted{color:var(--ink-faint)}
+
+/* HERO */
+header{position:relative;padding:72px 0 30px;background:
+  linear-gradient(180deg, rgba(28,32,30,.075), rgba(28,32,30,0) 44%),
+  radial-gradient(1200px 560px at 88% -12%, var(--brass-wash), transparent 58%),
+  radial-gradient(820px 460px at -6% 4%, var(--teal-wash), transparent 52%),var(--paper);
+  overflow:hidden}
+header::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background-repeat:no-repeat;
+  background-image:
+   radial-gradient(1.5px 1.5px at 12% 20%,rgba(168,118,31,.5),transparent),
+   radial-gradient(1px 1px at 23% 38%,rgba(35,41,43,.32),transparent),
+   radial-gradient(1.5px 1.5px at 37% 13%,rgba(168,118,31,.42),transparent),
+   radial-gradient(1px 1px at 51% 29%,rgba(35,41,43,.3),transparent),
+   radial-gradient(2px 2px at 66% 11%,rgba(168,118,31,.55),transparent),
+   radial-gradient(1px 1px at 77% 25%,rgba(35,41,43,.32),transparent),
+   radial-gradient(1.5px 1.5px at 88% 15%,rgba(168,118,31,.46),transparent),
+   radial-gradient(1px 1px at 95% 36%,rgba(35,41,43,.26),transparent),
+   radial-gradient(1px 1px at 6% 50%,rgba(168,118,31,.34),transparent),
+   radial-gradient(1.5px 1.5px at 43% 48%,rgba(35,41,43,.22),transparent),
+   radial-gradient(1px 1px at 71% 46%,rgba(168,118,31,.3),transparent),
+   radial-gradient(2px 2px at 30% 62%,rgba(168,118,31,.3),transparent),
+   radial-gradient(1px 1px at 83% 58%,rgba(35,41,43,.2),transparent),
+   radial-gradient(1.5px 1.5px at 57% 66%,rgba(168,118,31,.26),transparent)}
+header .wrap{position:relative;z-index:1}
+.hero-name{display:inline-flex;align-items:center;gap:12px;font-family:'Hanken Grotesk',sans-serif;font-style:italic;font-size:18px;color:var(--brass-deep);margin-bottom:18px}
+.hero-name::before{content:"❧";font-style:normal;font-size:22px}
+header h1{font-size:clamp(33px,4.1vw,50px);font-weight:700;line-height:1.12;margin-bottom:16px}
+header h1 .hl{color:var(--brass-deep);font-style:italic}
+.hero-sub{margin-top:0;font-size:21px;line-height:1.5;color:var(--ink-soft)}
+
+/* секции */
+section{padding:62px 0;border-top:1px solid var(--line);position:relative}
+.sec-tint{background:#f0e8d9}
+.shead{display:flex;align-items:baseline;gap:15px;margin-bottom:20px}
+.shead .num{display:none}
+.sec-num{position:absolute;top:-6px;right:4px;font-family:'Hanken Grotesk',sans-serif;font-size:58px;font-weight:600;color:#e3d7bd;line-height:1;pointer-events:none;z-index:0;letter-spacing:-.02em}
+h2{font-size:clamp(26px,3.4vw,38px);font-weight:600}
+.sintro{margin:0 0 22px;font-size:18.5px;line-height:1.5;color:var(--ink-soft);font-weight:500}
+
+/* якорь */
+.anchor{background:linear-gradient(135deg,var(--ink) 0%,#2f3a3a 100%);color:#f3ede0;border-radius:22px;padding:42px 50px;margin:0 -40px;position:relative;overflow:hidden;box-shadow:var(--shadow-lg)}
+@media(max-width:760px){.anchor{margin:0;padding:34px 26px}}
+.anchor>*{position:relative;z-index:1}
+.anchor-deco{position:absolute;inset:0;z-index:0;pointer-events:none}
+.anchor-deco span{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);font-size:var(--s);color:var(--brass);opacity:var(--o);line-height:1}
+.anchor .lbl{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass);font-weight:700;margin-bottom:14px}
+.anchor .formula{max-width:90%}
+.anchor .formula .lead{font-family:'Hanken Grotesk',sans-serif;font-size:clamp(25px,3.6vw,38px);font-weight:500;line-height:1.24;margin-bottom:20px}
+.anchor .formula .expl{font-size:clamp(16.5px,1.85vw,20px);font-weight:400;line-height:1.55;color:#d6cebf}
+.anchor .formula em{font-style:italic;color:#e6cd8f}
+.anchor .sub{margin-top:18px;font-size:clamp(16.5px,1.85vw,20px);font-weight:400;line-height:1.55;color:#d6cebf}
+
+/* generic */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.box{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--brass);border-radius:12px;padding:22px 24px;box-shadow:var(--shadow);transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s}
+.box:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.box h4{font-family:'Hanken Grotesk',sans-serif;font-size:18px;font-weight:700;margin-bottom:8px;color:var(--ink)}
+.box p{font-size:14.5px;color:var(--ink-soft)}
+.box .k{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--brass-deep);margin-bottom:10px}
+
+/* двухколоночный блок этапа */
+.split2{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
+.split2>div{padding:26px 28px}
+.split2 .pain{background:var(--coral-wash);border-right:1px solid var(--line)}
+.split2 .pain .lbl{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--coral);font-weight:700;margin-bottom:10px}
+.split2 .pain p{font-family:'Hanken Grotesk',sans-serif;font-style:italic;font-size:16px;color:var(--ink);line-height:1.4}
+.split2 .gain .lbl{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-deep);font-weight:700;margin-bottom:10px}
+.split2 .gain p{font-size:15px;color:var(--ink-soft);line-height:1.5}
+.split2 .gain b{color:var(--ink);font-weight:600}
+@media(max-width:760px){.split2{grid-template-columns:1fr}.split2 .pain{border-right:0;border-bottom:1px solid var(--line)}}
+
+/* шаги внутри этапа (что внутри) */
+.inside{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.inside .ic{background:var(--paper-2);border:1px solid var(--line);border-left:3px solid var(--brass);border-radius:12px;padding:18px 20px}
+.inside .ic h5{font-size:15.5px;font-weight:700;margin-bottom:5px}
+.inside .ic p{font-size:14px;color:var(--ink-soft);line-height:1.45}
+@media(max-width:760px){.inside{grid-template-columns:1fr}}
+
+/* три вопроса видения */
+.q3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+.qc{position:relative;background:linear-gradient(165deg,var(--card),var(--paper-2));border:1px solid var(--line);border-top:3px solid var(--brass);border-radius:16px;padding:30px 28px 28px;box-shadow:var(--shadow);overflow:hidden;min-height:200px;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s,border-color .3s}
+.qc:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.qc h4{font-family:'Hanken Grotesk',sans-serif;font-size:21px;font-weight:700;margin-bottom:12px;color:var(--ink)}
+.qc p{font-size:15.5px;color:var(--ink-soft);line-height:1.55}
+.qc.q-a{border-top-color:var(--brass)}
+.qc.q-b{border-top-color:var(--teal)}
+.qc.q-c{border-top-color:var(--coral)}
+@media(max-width:760px){.q3{grid-template-columns:1fr}}
+
+/* proof */
+.proof{display:grid;grid-template-columns:1.1fr 1fr;gap:20px;align-items:stretch}
+.proof-main{background:linear-gradient(160deg,var(--brass-wash),var(--card));border:1px solid var(--brass);border-radius:var(--r);padding:32px;box-shadow:var(--shadow)}
+.proof-main h4{font-family:'Hanken Grotesk',sans-serif;font-size:23px;font-weight:700;margin-bottom:14px;line-height:1.3}
+.proof-main p{font-size:15.5px;color:var(--ink-soft);margin-bottom:10px;line-height:1.55}
+.proof-side{display:flex;flex-direction:column;justify-content:space-between;gap:13px}
+.pfact{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--brass);border-radius:12px;padding:17px 19px;box-shadow:var(--shadow)}
+.pfact b{display:block;font-family:'Hanken Grotesk',sans-serif;font-size:16.5px;font-weight:700;color:var(--ink);margin-bottom:5px;line-height:1.25}
+.pfact p{font-size:14px;color:var(--ink-soft);margin-top:0;line-height:1.5}
+@media(max-width:760px){.proof{grid-template-columns:1fr}}
+
+/* результат */
+.outs{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.out{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--brass);border-radius:12px;padding:20px 22px;box-shadow:var(--shadow)}
+.out b{display:block;font-family:'Hanken Grotesk',sans-serif;font-size:17px;font-weight:700;color:var(--ink);margin-bottom:7px}
+.out p{font-size:14.5px;color:var(--ink-soft);line-height:1.5}
+.out.wide{grid-column:1/-1;background:linear-gradient(160deg,var(--brass-wash),var(--card));border-color:var(--brass)}
+@media(max-width:760px){.outs{grid-template-columns:1fr}.out.wide{grid-column:auto}}
+
+/* врезка AI-контур */
+.aside{margin-top:26px;background:var(--teal-wash);border:1px solid var(--teal);border-radius:var(--r);padding:24px 26px}
+.aside .lbl{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-deep);font-weight:700;margin-bottom:8px}
+.aside h4{font-family:'Hanken Grotesk',sans-serif;font-size:18px;font-weight:600;margin-bottom:6px}
+.aside p{font-size:14.5px;color:var(--ink-soft);line-height:1.5}
+
+/* формат + цена */
+.fmt{display:grid;grid-template-columns:1.5fr 1fr;gap:16px;align-items:stretch}
+.fmt-tiles{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ftile{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--brass);border-radius:12px;padding:18px 18px 20px;box-shadow:var(--shadow)}
+.ftile .k{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--brass);font-weight:700;margin-bottom:9px}
+.ftile .v{font-family:'Hanken Grotesk',sans-serif;font-size:17px;color:var(--ink);font-weight:700;line-height:1.25}
+.price{display:flex;flex-direction:column;justify-content:center;gap:4px;background:linear-gradient(160deg,var(--brass-wash),var(--card));border:1px solid var(--brass);border-radius:var(--r);padding:30px;box-shadow:var(--shadow)}
+.price .pp{font-family:'Hanken Grotesk',sans-serif;font-size:clamp(28px,3.1vw,37px);font-weight:700;color:var(--brass-deep);line-height:1.04}
+.price .pp span{display:block;font-size:13px;color:var(--ink-faint);font-weight:700;letter-spacing:.09em;text-transform:uppercase;margin-top:7px}
+.price p{color:var(--ink-soft);font-size:15.5px;line-height:1.6;margin-top:15px}
+@media(max-width:760px){.fmt{grid-template-columns:1fr}}
+@media(max-width:760px){.fmt{grid-template-columns:1fr}.fmt .kv .row{grid-template-columns:1fr}}
+
+/* cta */
+.cta{margin-top:8px;background:linear-gradient(120deg,var(--brass-wash),var(--teal-wash));border:1px solid var(--brass);border-radius:22px;padding:36px;text-align:center}
+.cta h3{font-family:'Hanken Grotesk',sans-serif;font-size:clamp(23px,3vw,32px);font-weight:600}
+.cta p{color:var(--ink-soft);margin:10px auto 0;max-width:56ch;font-size:16.5px}
+.steps{margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.steps span{background:var(--card);border:1px solid var(--line);border-radius:100px;padding:8px 16px;font-size:13.5px;color:var(--ink-soft)}
+.cta-actions{margin-top:26px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.cta-btn{display:inline-flex;align-items:center;gap:9px;font-family:'Hanken Grotesk',sans-serif;font-size:15.5px;font-weight:700;text-decoration:none;border-radius:100px;padding:14px 28px;transition:transform .2s,box-shadow .2s,background .2s}
+.cta-btn.primary{background:var(--teal);color:#fff;border:1px solid var(--teal);box-shadow:var(--shadow)}
+.cta-btn.primary:hover{background:var(--teal-deep);border-color:var(--teal-deep);transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.cta-btn.ghost{background:var(--card);color:var(--brass-deep);border:1px solid var(--brass)}
+.cta-btn.ghost:hover{background:var(--brass-wash)}
+
+footer{padding:42px 0 64px;border-top:1px solid var(--line);color:var(--ink-faint);font-size:13px;text-align:center}
+footer .att{color:var(--brass-deep);font-family:'Hanken Grotesk',sans-serif;font-style:italic}
+
+.sidenav{position:fixed;left:0;top:0;height:100vh;width:280px;background:var(--paper-2);border-right:1px solid var(--line);padding:34px 20px;display:flex;flex-direction:column;gap:7px;z-index:60;overflow-y:auto}
+.sidenav .sb-brand{font-family:'Unbounded',sans-serif;font-weight:800;font-size:17px;letter-spacing:-.02em;line-height:1.15;color:var(--ink);text-align:center;margin-bottom:24px}
+.sidenav .sb-brand .dot{color:var(--key)}
+.sidenav .sn-h{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);font-weight:700;margin-bottom:6px;padding-left:15px;line-height:1.4}
+.ex-link{display:inline-flex;align-items:center;gap:8px;margin-top:20px;font-size:14px;font-weight:600;color:var(--brass-deep);text-decoration:none;border:1px solid var(--brass);border-radius:100px;padding:10px 20px;background:var(--card);transition:background .2s}
+.ex-link::after{content:"↗";font-size:13px}
+.ex-link:hover{background:var(--brass-wash)}
+.sidenav .sn-sub{font-family:'Hanken Grotesk',sans-serif;font-size:16px;color:var(--ink);font-weight:600;margin-bottom:18px;padding-left:15px;line-height:1.3}
+.sidenav a{display:flex;gap:12px;align-items:baseline;font-size:15px;color:var(--ink-soft);text-decoration:none;padding:14px 16px;border-radius:10px;line-height:1.25;border:1px solid transparent;background:#f2ead9;transition:background .2s,color .2s,border-color .2s}
+.sidenav a .n{font-family:'Hanken Grotesk',sans-serif;font-size:14px;color:var(--brass);font-weight:700;flex:0 0 20px}
+.sidenav a:hover{border-color:var(--brass)}
+.sidenav a.active{background:var(--brass-wash);border-color:var(--brass);color:var(--brass-deep);font-weight:600}
+.sidenav a.active .n{color:var(--brass-deep)}
+.sidenav .sn-foot{margin-top:auto;padding-top:20px;font-size:12px;color:var(--ink-faint);line-height:1.4;padding-left:15px}
+@media(min-width:1025px){body{padding-left:280px}}
+@media(max-width:1024px){.sidenav{display:none}}
+/* структура сюжетной Арки — лента из 5 этапов */
+.arc-explainer{margin-bottom:18px}
+.arc-explainer .stages{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-bottom:7px}
+.arc-explainer .stage{height:38px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:var(--ink);text-align:center;padding:0 6px;line-height:1.1;border-radius:7px}
+.arc-explainer .descs{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
+.arc-explainer .desc{position:relative;padding:16px 16px 18px;background:var(--card);border:1px solid var(--line);border-top:3px solid transparent;border-radius:0 0 10px 10px;font-size:13.5px;line-height:1.5;color:var(--ink-soft);box-shadow:var(--shadow)}
+.arc-explainer .desc .dn{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--ink-faint);margin-bottom:9px;text-transform:uppercase}
+.arc-explainer .stage.s1{background:#f4e4a8}.arc-explainer .stage.s2{background:#c9e0b4}.arc-explainer .stage.s3{background:#f5c89e}.arc-explainer .stage.s4{background:#f0a896}.arc-explainer .stage.s5{background:#d8b9d6}
+.arc-explainer .desc.s1{border-top-color:#c9a942}
+.arc-explainer .desc.s2{background:var(--card);border-top-color:#7eb866}
+.arc-explainer .desc.s3{background:var(--card);border-top-color:#e0904c}
+.arc-explainer .desc.s4{background:var(--card);border-top-color:#d56a56}
+.arc-explainer .desc.s5{background:var(--card);border-top-color:#ab7dab}
+@media(max-width:680px){.arc-explainer .stages,.arc-explainer .descs{grid-template-columns:1fr}}
+/* ИСТОРИЯ — текст слева (≈40%), доска истории справа (≈60%) */
+.histwrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:26px;align-items:start}
+.histwrap .h-left{display:flex;flex-direction:column;gap:14px}
+.histwrap .h-left .sintro{margin:0;font-size:16px}
+.hl-pain{background:var(--coral-wash);border:1px solid var(--line);border-left:3px solid var(--coral);border-radius:12px;padding:15px 17px}
+.hl-pain .lbl{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--coral);font-weight:700;margin-bottom:8px}
+.hl-pain p{font-style:italic;font-size:15px;color:var(--ink);line-height:1.45}
+.hl-gain{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:12px;padding:15px 17px}
+.hl-gain .lbl{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-deep);font-weight:700;margin-bottom:8px}
+.hl-gain p{font-size:14.5px;color:var(--ink-soft);line-height:1.5}
+.hl-gain b{color:var(--ink);font-weight:600}
+/* доска "история на доске" — высота = левому блоку, скролл внутри */
+.histwrap .h-right{display:flex;flex-direction:column;min-height:0}
+.sheet{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:18px 16px 14px;display:flex;flex-direction:column;flex:1;min-height:0}
+.sheet-title{font-size:16px;font-weight:700;text-align:center;color:var(--ink);letter-spacing:-.01em;margin-bottom:2px}
+.sheet-sub{font-size:11.5px;text-align:center;color:var(--ink-faint);margin-bottom:13px}
+.sheet-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line);overflow-y:auto;flex:1;min-height:0;align-content:start;scrollbar-width:thin}
+.yc{aspect-ratio:1/1.32;border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:3px 3px 2px;background:var(--card);cursor:pointer;display:flex;flex-direction:column;gap:2px;transition:background .12s;position:relative}
+.yc:hover{background:var(--brass-wash)}
+.yc.future{background:#faf8f1}.yc.future:hover{background:#f3ecda}
+.yc.active{background:var(--card);box-shadow:inset 0 0 0 2px var(--brass);z-index:2}
+.yc .y-num{font-family:var(--mono);font-size:9.5px;color:var(--ink-faint);font-weight:500;line-height:1}
+.yc.active .y-num{color:var(--brass-deep);font-weight:700}
+.yc .seasons{display:grid;grid-template-rows:repeat(4,1fr);flex-grow:1;margin-top:4px}
+.yc .season{padding:1px;display:flex;flex-wrap:wrap;gap:1px;align-content:center;align-items:center;overflow:hidden;border-bottom:1px dashed var(--line-2)}
+.yc .season:last-child{border-bottom:none}
+.yc .dot{width:9px;height:5px;border-radius:1px;flex-shrink:0;box-shadow:inset 0 .5px 0 rgba(255,255,255,.4)}
+.dot.yel{background:#e3a82c}.dot.grn{background:#4ca871}.dot.pnk{background:#cf6e94}.dot.blu{background:#5283c2}.dot.org{background:#d27c3c}.dot.gry{background:#9e968a}.dot.lila{background:#9579bc}
+.sheet-hint{font-size:11px;color:var(--ink-faint);text-align:center;margin-top:10px;line-height:1.4}
+.sheet-hint .hl{color:var(--brass-deep);font-weight:700}
+/* модалка md-файла года */
+.ydoc-ov{position:fixed;inset:0;z-index:200;display:flex;align-items:flex-start;justify-content:center;background:rgba(35,41,43,.52);padding:48px 24px;overflow-y:auto;animation:ydIn .18s ease-out}
+@keyframes ydIn{from{opacity:0}to{opacity:1}}
+.ydoc-modal{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-lg);max-width:600px;width:100%;max-height:84vh;overflow-y:auto;padding:26px 30px 32px;position:relative;animation:ydUp .2s ease-out}
+@keyframes ydUp{from{transform:translateY(10px);opacity:0}to{transform:translateY(0);opacity:1}}
+.ydoc-modal .x{position:absolute;top:12px;right:14px;background:none;border:none;cursor:pointer;width:32px;height:32px;color:var(--ink-faint);font-size:23px;line-height:1;border-radius:6px}
+.ydoc-modal .x:hover{background:var(--brass-wash);color:var(--ink)}
+.ydoc-modal .fn{font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--ink-faint);display:flex;align-items:center;gap:6px;padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:14px}
+.ydoc-modal .fm{font-family:var(--mono);font-size:12px;color:var(--ink-faint);background:var(--paper-2);border:1px solid var(--line-2);padding:11px 13px;border-radius:6px;margin-bottom:18px;line-height:1.6;white-space:pre}
+.ydoc-modal .fm .k{color:var(--brass-deep)}
+.ydoc-modal .fm .v{color:var(--ink)}
+.ydoc-modal .fm .d{color:var(--ink-faint)}
+.ydoc-modal h3.t{font-family:var(--mono);font-size:18px;color:var(--ink);font-weight:700;margin:4px 0 16px;letter-spacing:.01em}
+.ydoc-modal h3.t .h{color:var(--ink-faint);margin-right:7px}
+.ydoc-modal h4.s{font-family:var(--mono);font-size:13px;color:var(--brass-deep);font-weight:700;margin:18px 0 8px;letter-spacing:.02em}
+.ydoc-modal h4.s .h{color:var(--ink-faint);margin-right:6px}
+.ydoc-modal p.l{font-size:14.5px;color:var(--ink-soft);margin:8px 0;line-height:1.55}
+.ydoc-modal .sub{font-family:var(--mono);font-size:12px;color:var(--ink-faint);font-style:italic;margin:-8px 0 4px}
+.ydoc-modal ul.li{margin:6px 0 6px 18px;padding:0}
+.ydoc-modal ul.li li{font-size:14px;color:var(--ink);margin:5px 0;line-height:1.5}
+.ydoc-modal ul.ev{margin:6px 0 8px;padding:0;list-style:none}
+.ydoc-modal ul.ev li{position:relative;font-size:14px;color:var(--ink);margin:6px 0;line-height:1.45;padding-left:18px}
+.ydoc-modal ul.ev li .dot{position:absolute;left:0;top:6px;width:9px;height:6px;border-radius:1px}
+.ydoc-modal .tone{font-size:14px;color:var(--ink-soft);font-style:italic;line-height:1.55;border-left:3px solid var(--brass);padding-left:14px;margin-top:6px}
+@media(max-width:760px){.histwrap{grid-template-columns:1fr}.histwrap .h-right{height:auto!important}.sheet-grid{overflow:visible}}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+
+<nav class="sidenav" id="sidenav"><div class="sb-brand">Филиппов и<br>Аттракцион<span class="dot">.</span></div></nav>
+
+<!-- HERO -->
+<header>
+  <div class="wrap">
+    <h1 class="display">Видение будущего,<br>созданное из вашей истории</h1>
+    <p class="hero-sub">Не доска желаний и не цели на год, а ответ: кто вы в следующей главе и куда она ведёт.</p>
+  </div>
+</header>
+
+<!-- ЯКОРЬ -->
+<section style="border-top:0;padding:0 0 30px">
+  <div class="wrap">
+    <div class="anchor reveal">
+      <div class="anchor-deco" aria-hidden="true">
+        <span style="--x:70%;--y:26%;--s:26px;--o:.14">✦</span>
+        <span style="--x:88%;--y:40%;--s:60px;--o:.2">✦</span>
+        <span style="--x:76%;--y:62%;--s:34px;--o:.16">✦</span>
+        <span style="--x:93%;--y:74%;--s:22px;--o:.12">✦</span>
+        <span style="--x:82%;--y:86%;--s:44px;--o:.15">✦</span>
+      </div>
+      <div class="lbl">в чём суть</div>
+      <div class="formula">
+        <p class="lead">Видение вырастает <em>из прожитого</em>, а не придумывается на пустом месте.</p>
+        <p class="expl">Ваша история уже содержит узор — точки, где вы побеждаете самым естественным для себя образом: тем, что получается лучше всего, опираясь на свои сильные стороны.</p>
+      </div>
+      <div class="sub">Поэтому сформированное Видение — огромная опора: каждое решение в бизнесе и в жизни даётся вам намного проще и очевиднее, ведь вы знаете, в каком направлении оно вас ведёт.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 1. ЧТО ЭТО -->
+<section>
+  <div class="wrap">
+    <div class="shead"><span class="num">01</span><h2 class="display" data-nav="Кто я">Я — Дмитрий Филиппов, методолог</h2></div>
+    <p class="sintro">Много лет помогаю собирать Видение — и клиентам, и себе. Маршрут: <b>История → Сюжетные Арки → Видение</b>. Сначала восстанавливаем прожитое, затем находим в нём узор, затем из него рождается следующая глава.</p>
+    <div class="grid-3">
+      <div class="box"><div class="k">Методология</div><h4>История → Арки → Видение</h4><p>Три последовательных шага. Каждый опирается на предыдущий — Видение не висит в воздухе, оно вырастает из вашего пути.</p></div>
+      <div class="box"><div class="k">Для кого</div><h4>Тем, кто многого достиг</h4><p>Когда цели, к которым шли, закрыты, а внутри вопрос «дальше что и зачем». Методология даёт ответ, а не очередной список задач.</p></div>
+      <div class="box"><div class="k">Чем отличается</div><h4>Не коучинг с вопросами</h4><p>Не «чего вы хотите?» в пустоту. Я веду через разбор вашего прошлого — Видение вырастает из материала, а не из фантазии.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. ИСТОРИЯ -->
+<section>
+  <div class="wrap">
+    <div class="shead"><span class="num">02</span><h2 class="display">История</h2></div>
+    <div class="histwrap reveal">
+      <div class="h-left">
+        <p class="sintro">Первый шаг — восстановить биографию целиком, год за годом. Не литература, а рабочий документ: события, ключевые решения, поворотные точки, провалы и победы.</p>
+        <div class="hl-pain"><div class="lbl">Тревога, о которой не говорят</div><p>«Не вижу узора своей жизни и действую на ощупь. Живу с фоновым ощущением, что упускаю что-то важное и иду немного не туда».</p></div>
+        <div class="hl-gain"><div class="lbl">Что меняется</div><p>Видите <b>всю картину жизни целиком</b> — взгляд с высоты вместо разрозненных кусков. Это фундамент: Видение без него — дом на мягкой земле, который рушится при первом серьёзном ветре.</p></div>
+      </div>
+      <div class="h-right">
+        <div class="sheet">
+          <div class="sheet-title">История жизни</div>
+          <div class="sheet-sub">синтетический пример · Иван Петров, 1980 г.р.</div>
+          <div class="sheet-grid" id="sheetGrid"></div>
+          <div class="sheet-hint">Каждая клетка — год, метки внутри — события. <span class="hl">Нажмите на год, чтобы открыть его документ.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. СЮЖЕТНЫЕ АРКИ -->
+<section>
+  <div class="wrap">
+    <div class="shead"><span class="num">03</span><h2 class="display">Сюжетные Арки</h2></div>
+    <p class="sintro">Список прожитого — ещё не история, это сырьё. Чтобы из него проступила история, нужна структура. Жизнь не ровная линия — она, как сериал, распадается на Арки-сезоны: у каждой свой мир, свой главный вопрос, своё напряжение и свой финал, после которого начинается уже другая история.</p>
+    <div class="arc-explainer reveal">
+      <div class="stages">
+        <div class="stage s1">Экспозиция</div>
+        <div class="stage s2">Завязка</div>
+        <div class="stage s3">Развитие</div>
+        <div class="stage s4">Кульминация</div>
+        <div class="stage s5">Развязка</div>
+      </div>
+      <div class="descs">
+        <div class="desc s1"><span class="dn">этап 01</span>Мир до появления главного героя.</div>
+        <div class="desc s2"><span class="dn">этап 02</span>Событие, определяющее ход всей дальнейшей Арки.</div>
+        <div class="desc s3"><span class="dn">этап 03</span>Новые друзья, враги и испытания.</div>
+        <div class="desc s4"><span class="dn">этап 04</span>Столкновение, главный конфликт Арки.</div>
+        <div class="desc s5"><span class="dn">этап 05</span>Итог Арки: победа, поражение или компромисс.</div>
+      </div>
+    </div>
+    <div class="inside">
+      <div class="ic"><h5>Урок каждой Арки</h5><p>Главное в Арке — не этапы, а её внутренний итог: какой урок она несла и усвоен ли он. По каждой разбираем сильные и слабые стороны прожитого, главный конфликт и вывод, который остаётся с вами.</p></div>
+      <div class="ic"><h5>Три финала</h5><p>Победа — урок усвоен, мир распахивает новые горизонты. Поражение — прогресс обнуляется. Компромисс — самый коварный: уступка в мелочах почти равна победе, крупная отправляет на новый круг — те же уроки придётся проходить заново.</p></div>
+      <div class="ic"><h5>Где вы сейчас</h5><p>Главное, что проступает: в какой Арке вы сейчас и на каком её этапе — только входите в завязку, продираетесь сквозь развитие или уже у финала, — а вместе с этим проясняется и что делать: усилить завязку, ускорить развитие или достойно довести Арку до победного финала.</p></div>
+      <div class="ic"><h5>Шахматная интуиция</h5><p>Знание собственных сюжетов работает как насмотренность мастера: в новой ситуации знакомый узор сам притягивает взгляд к верному ходу. И дальше — как сильный шахматист: вы не ищете ход с нуля, а проверяете найденный на прочность, разбирая, чем он может быть плох.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. ВИДЕНИЕ -->
+<section>
+  <div class="wrap">
+    <div class="shead"><span class="num">04</span><h2 class="display">Формирование Видения</h2></div>
+    <p class="sintro">Видение — это авторская работа с вашими Арками: и с той, что идёт прямо сейчас, и со всеми будущими. К какому победному финалу вести Арку, какой ход её продолжит, что станет кульминацией. Не доска желаний и не цели на год — они про деятельность, а не про то, кто вы в ней. Строится через три вопроса.</p>
+    <div class="q3">
+      <div class="qc q-a"><h4>Кто я в новой главе</h4><p>Роль, способ быть. Кем вы входите в следующий период — не должность, а фигура.</p></div>
+      <div class="qc q-b"><h4>Что вокруг</h4><p>Окружение, контекст, рамки. Мир, в котором эта глава разворачивается.</p></div>
+      <div class="qc q-c"><h4>К чему аппетит</h4><p>Что вытаскивает энергию изнутри. Ставка, ради которой стоит двигаться.</p></div>
+    </div>
+    <div class="inside" style="margin-top:18px">
+      <div class="ic"><h5>Прогрессивный джипег</h5><p>Сначала грубый контур всей картины, потом детализация слоями. Снимает страх белого листа — не нужно сразу знать ответ.</p></div>
+      <div class="ic"><h5>Авторизация будущего</h5><p>Вы становитесь автором своей следующей главы, а не пользователем чужого шаблона. Видение — ваше, настроенное под вас.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. ПОЧЕМУ СРАБОТАЕТ -->
+<section>
+  <div class="wrap">
+    <div class="shead"><span class="num">05</span><h2 class="display" data-nav="Основания">Прожито на себе и на клиентах</h2></div>
+    <p class="sintro">За методологией — мой собственный путь и многолетняя практика.</p>
+    <div class="proof">
+      <div class="proof-main">
+        <h4>Отдаю клиентам то, чем пользуюсь сам</h4>
+        <p>У меня есть собственное Видение, выросшее из долгого изучения и осмысления своей истории, и ежедневная сверка с ним. Только проверенное на себе я предлагаю клиентам.</p>
+        <p>Метод сюжетных Арок я довёл до рабочего инструмента в персональном консалтинге. Клиенты проходят его и получают опору, с которой решения становятся ясными вместо метания между страхом и инерцией.</p>
+      </div>
+      <div class="proof-side">
+        <div class="pfact"><b>Четыре года без пропусков</b><p>Веду канал каждый день — дисциплина, проверяемая делом.</p></div>
+        <div class="pfact"><b>1100+ постов</b><p>Открытая летопись пути на виду.</p></div>
+        <div class="pfact"><b>Годы работы с клиентами</b><p>Метод отшлифован в живой практике, не на одном кейсе.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. РЕЗУЛЬТАТ -->
+<section>
+  <div class="wrap">
+    <div class="shead"><span class="num">06</span><h2 class="display">Что вы получаете</h2></div>
+    <p class="sintro">На выходе — не вдохновение на пару недель, а рабочие артефакты и устойчивый сдвиг.</p>
+    <div class="outs">
+      <div class="out"><b>Карта вашей жизни</b><p>История, сюжетные Арки и всё прожитое, собранное в одну картину: события, выводы, уроки.</p></div>
+      <div class="out"><b>Документ «Видение»</b><p>Кто вы в следующей главе и какой вы герой, что вокруг и к чему аппетит. Это задаёт сетку координат, по которой сверяется каждое решение.</p></div>
+      <div class="out"><b>Опора в текущей Арке</b><p>Ясно, где вы сейчас и как достойно довести эту главу до победного финала.</p></div>
+      <div class="out"><b>Курс на следующую Арку</b><p>Видно, что лежит за финалом этой главы — куда двигаться, когда она завершится.</p></div>
+      <div class="out wide"><b>Жизнь с пониманием себя</b><p>И спокойная уверенность: каждое ваше движение ведёт вас к высшей цели — к предназначению.</p></div>
+    </div>
+    <div class="aside">
+      <div class="lbl">и дальше — по желанию</div>
+      <h4>Видение можно оживить в AI-Контуре</h4>
+      <p>Готовое Видение легко превратить из документа в живую среду: личный AI-контур, который держит вашу картину в фоне каждый день и помогает сверять с ней решения. Это отдельное продолжение — расскажу, если будет интересно.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 7. ФОРМАТ И СТОИМОСТЬ -->
+<section>
+  <div class="wrap">
+    <div class="shead"><span class="num">07</span><h2 class="display">Формат и стоимость</h2></div>
+    <p class="sintro">Работаем плотно и регулярно — глубину даёт ритм, а не разовые встречи.</p>
+    <div class="fmt">
+      <div class="fmt-tiles">
+        <div class="ftile"><div class="k">Длительность</div><div class="v">2 месяца</div></div>
+        <div class="ftile"><div class="k">Ритм</div><div class="v">2–3 встречи в неделю</div></div>
+        <div class="ftile"><div class="k">Встреча</div><div class="v">1,5–2 часа</div></div>
+        <div class="ftile"><div class="k">Формат</div><div class="v">Индивидуально, онлайн</div></div>
+      </div>
+      <div class="price">
+        <div class="pp">560 000 ₽<span>за программу</span></div>
+        <p>Два месяца плотной работы по методологии. Все материалы и артефакты остаются в вашем хранилище.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. КАК НАЧАТЬ -->
+<section>
+  <div class="wrap">
+    <div class="shead"><span class="num">08</span><h2 class="display">Как начать</h2></div>
+    <p class="sintro">Вход — через знакомство-разговор: смотрим вашу ситуацию и решаем, в нужный ли момент эта работа.</p>
+    <div class="cta">
+      <h3 class="display">Первый шаг — разговор-знакомство</h3>
+      <p>Без обязательств: познакомимся, я расскажу о методологии подробнее под вашу ситуацию, вы поймёте, ваше ли это сейчас.</p>
+      <div class="steps"><span>① знакомство</span><span>② история и Арки</span><span>③ Видение следующей главы</span><span>④ опора для решений</span></div>
+    </div>
+    <div class="cta-actions">
+      <a class="cta-btn primary" href="https://t.me/AskFilippov" target="_blank" rel="noopener">Написать в Telegram · @AskFilippov</a>
+      <a class="cta-btn ghost" href="#" onclick="return false">Оставить заявку</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Видение по методологии Дмитрия Филиппова · сайт составлен <span class="att">Аттракционом</span> · 2026
+  </div>
+</footer>
+
+<script>
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:0,rootMargin:"0px 0px -6% 0px"});
+const revEls=document.querySelectorAll('section .shead, section .sintro, .anchor, .grid-3, .grid-2, .split2, .histwrap, .arc-explainer, .inside, .q3, .proof, .outs, .aside, .fmt, .cta');
+revEls.forEach(el=>{el.classList.add('reveal');io.observe(el)});
+requestAnimationFrame(()=>revEls.forEach(el=>{if(el.getBoundingClientRect().top<innerHeight*1.1)el.classList.add('in')}));
+setTimeout(()=>revEls.forEach(el=>el.classList.add('in')),1400);
+
+const navSecs=[...document.querySelectorAll('section')].filter(s=>s.querySelector('.shead h2'));
+const sn=document.getElementById('sidenav');
+navSecs.forEach((s,i)=>{
+  s.id='s'+i;
+  if(i%2===1)s.classList.add('sec-tint');
+  const num=String(i+1).padStart(2,'0');
+  const w=s.querySelector('.wrap');
+  if(w){const sNum=document.createElement('div');sNum.className='sec-num';sNum.textContent=num;w.appendChild(sNum);}
+  const h2el=s.querySelector('.shead h2');
+  const t=h2el.dataset.nav||h2el.textContent.replace(/\s*[—(].*/,'').trim();
+  const a=document.createElement('a');a.href='#s'+i;a.innerHTML='<span class="n">'+num+'</span><span>'+t+'</span>';
+  sn.appendChild(a);
+});
+const snFoot=document.createElement('div');snFoot.className='sn-foot';snFoot.textContent='Методология Видения · 2026';sn.appendChild(snFoot);
+const navObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)sn.querySelectorAll('a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:"-45% 0px -50% 0px"});
+navSecs.forEach(s=>navObs.observe(s));
+
+/* === ИСТОРИЯ НА ДОСКЕ — синтетический пример того, как методология структурирует прожитое === */
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const TL={
+  name:'Иван Петров', birthYear:1980, startDecade:1981, decadesCount:7,
+  events:{
+    1985:{ev:[{c:'org',t:'Родился. Москва, Беляево, роддом №25'},{c:'gry',t:'Старший брат Денис, 4 года, ревновал'},{c:'gry',t:'Отец-инженер на оборонном заводе'},{c:'gry',t:'Мать-врач в районной поликлинике'},{c:'pnk',t:'Бабушка Лиза приехала из Тулы помогать'},{c:'yel',t:'Имя выбирали две недели'}],people:['Денис (брат)','отец Виктор','мать Светлана','бабушка Лиза'],tags:['рождение','семья','контекст-СССР'],tone:'Год начала. Семья на пике родительского ресурса, но страна уже начинает разваливаться.'},
+    1986:{ev:[{c:'yel',t:'Первые шаги в 11 месяцев'},{c:'pnk',t:'Семейный отпуск в Ялте, первый загар'},{c:'gry',t:'Бабушка приезжает каждое лето'},{c:'yel',t:'Первое слово — «дай»'},{c:'gry',t:'Авария на Чернобыле — паника в семье'}],people:['бабушка Лиза','родители'],tags:['младенчество','семья']},
+    1987:{ev:[{c:'org',t:'Переезд в трёхкомнатную на Юго-Западной'},{c:'yel',t:'Первая семейная фотокарточка'},{c:'pnk',t:'Подружились с соседями — семья Кирилла'},{c:'gry',t:'Первый телевизор — цветной'},{c:'yel',t:'Научился собирать пирамидку'}],people:['Кирилл (сосед)'],tags:['переезд','дружба']},
+    1988:{ev:[{c:'gry',t:'Заговорил поздно — родители беспокоились'},{c:'blu',t:'Поступил в детский сад'},{c:'yel',t:'Первая стрижка, ревёл'},{c:'pnk',t:'Дружим домами с Кириллом'},{c:'gry',t:'В магазинах исчезли продукты'}],people:['Кирилл','воспитательница Нина Семёновна'],tags:['садик','контекст-перестройка']},
+    1989:{ev:[{c:'blu',t:'Детский сад, средняя группа'},{c:'pnk',t:'Лучший друг — Саша из садика'},{c:'yel',t:'Полюбил конструкторы — подарили на день рождения'},{c:'gry',t:'Первый раз увидел компьютер у дяди'},{c:'org',t:'Болел всю осень — слабый иммунитет'}],people:['Саша','Кирилл','дядя Олег'],tags:['садик','дружба','здоровье']},
+    1990:{ev:[{c:'gry',t:'Перестройка, дефицит в магазинах'},{c:'org',t:'Отец остался без зарплаты — завод остановился'},{c:'gry',t:'Мама перешла на полставки'},{c:'pnk',t:'Дед взял с собой первый раз на рыбалку'},{c:'yel',t:'Подготовительные курсы при школе'}],people:['отец','мать','дед Иван','Денис'],tags:['кризис-семьи','подготовка-к-школе'],tone:'Первый удар по семье — перестройка ломает устойчивость родителей. Я ещё мал, чтобы понимать масштаб, но напряжение чувствую.'},
+    1991:{ev:[{c:'pnk',t:'Первая серьёзная дружба — Андрей со двора'},{c:'org',t:'Тяжёлая пневмония, месяц в больнице'},{c:'yel',t:'Дед научил собирать радиосхемы'},{c:'gry',t:'Распался СССР — отец молча смотрел телевизор'},{c:'pnk',t:'Сестра Катя приехала жить к нам'}],people:['Андрей','дед Иван','Катя (сестра)'],tags:['дружба','болезнь','распад-СССР']},
+    1992:{ev:[{c:'blu',t:'Школа, первый класс'},{c:'pnk',t:'Первая учительница — Татьяна Ивановна'},{c:'yel',t:'Первая медаль — за чтение наизусть'},{c:'org',t:'Первая драка во дворе'},{c:'gry',t:'Талоны на сахар, очереди'},{c:'pnk',t:'Ходим в школу вместе с Кириллом'}],people:['Татьяна Ивановна','Кирилл','Андрей'],tags:['школа','первый-класс']},
+    1993:{ev:[{c:'blu',t:'Второй класс'},{c:'grn',t:'Полюбил математику — олимпиады'},{c:'pnk',t:'Поездка в Прибалтику — первое море'},{c:'yel',t:'Первая собственная книга'},{c:'org',t:'Расстрел Белого дома — родители в шоке'}],people:['родители','Татьяна Ивановна'],tags:['школа','математика']},
+    1994:{ev:[{c:'org',t:'Умер дед по отцовской линии'},{c:'gry',t:'Бабушка переехала к нам'},{c:'blu',t:'Учил длинные стихи наизусть'},{c:'pnk',t:'Подружился с одноклассником Димой'},{c:'yel',t:'Первая поездка в лагерь, тосковал'}],people:['дед Иван (умер)','бабушка Лиза','Дима'],tags:['потеря','семья','школа'],tone:'Первая встреча со смертью. Семья сжимается вокруг утраты, бабушка приезжает насовсем.'},
+    1995:{ev:[{c:'yel',t:'Дома появился первый компьютер'},{c:'grn',t:'Первая программа на бейсике'},{c:'blu',t:'Запоем читал фантастику'},{c:'pnk',t:'Кружок робототехники'},{c:'pnk',t:'Влюбился впервые — Аня из класса'},{c:'yel',t:'Первая большая двойка — обиделся'}],people:['Аня','Дима','Кирилл'],tags:['компьютер','чтение','влюблённость']},
+    1996:{ev:[{c:'grn',t:'Победа на районной матолимпиаде'},{c:'blu',t:'Перешёл в физмат-класс'},{c:'org',t:'Первый поход в горы'},{c:'pnk',t:'Подружился с одноклассницей Леной'},{c:'yel',t:'Открыл для себя The Beatles'},{c:'gry',t:'Операция матери — всё обошлось'}],people:['Лена','мать','Дима'],tags:['олимпиады','поход','музыка']},
+    1997:{ev:[{c:'pnk',t:'Первая поездка за границу — всей семьёй'},{c:'pnk',t:'Друзья на всю жизнь — Кирилл и Дима'},{c:'yel',t:'Первая модемная связь — диалап'},{c:'grn',t:'Призёр всероссийской олимпиады по информатике'}],people:['Кирилл','Дима','родители'],tags:['путешествия','дружба','интернет']},
+    1998:{ev:[{c:'gry',t:'Дефолт. Отец снова без работы'},{c:'org',t:'Переезд в съёмную двушку'},{c:'gry',t:'Экономия на всём'},{c:'yel',t:'Стал зарабатывать первые деньги — печатал курсачи'},{c:'org',t:'Серьёзная ссора родителей'},{c:'pnk',t:'Утешал маму, впервые ощутил себя взрослым'}],people:['отец','мать'],tags:['дефолт','кризис-семьи','первая-работа'],tone:'Второй большой удар по семейной устойчивости. Я уже не маленький — наблюдаю, как родители теряют почву под ногами, и впервые думаю: «больше так не хочу».'},
+    1999:{ev:[{c:'pnk',t:'Первая любовь — Маша из параллельного'},{c:'pnk',t:'Первый поцелуй на школьной дискотеке'},{c:'grn',t:'Первое место на городской олимпиаде'},{c:'blu',t:'Подготовка к выпускным'},{c:'pnk',t:'Дружба с Сергеем — будущим напарником'}],people:['Маша','Сергей','Кирилл'],tags:['любовь','подготовка','школа']},
+    2000:{ev:[{c:'grn',t:'Окончил школу, серебряная медаль'},{c:'blu',t:'Поступил на мехмат'},{c:'org',t:'Первая поездка одного — Питер с Кириллом'},{c:'pnk',t:'Расставание с Машей'},{c:'pnk',t:'Жил на квартире у бабушки'},{c:'lila',t:'Первая попытка преподавать — репетиторство'}],people:['Маша','Кирилл','бабушка Лиза'],tags:['выпуск','поступление','новая-глава'],tone:'Конец одной эпохи и начало другой — стою на пороге взрослой жизни, ещё не понимая, что от меня требуется.'},
+    2001:{ev:[{c:'pnk',t:'Влился в студенческую тусовку'},{c:'org',t:'Первая большая ссора с родителями'},{c:'pnk',t:'Подружился с группой будущих коллег'},{c:'blu',t:'Записался в научное общество'},{c:'gry',t:'9/11 — смотрели в общаге, шок'}],people:['родители','Артём (одногруппник)'],tags:['университет','свобода']},
+    2002:{ev:[{c:'lila',t:'Стажировка в банке, дата-аналитика'},{c:'yel',t:'Первая зарплата'},{c:'blu',t:'Прочитал «Цель» Голдратта — поразило'},{c:'pnk',t:'Новые отношения — Лера, тоже студентка'},{c:'org',t:'Первая зимняя сессия — еле сдал теорвер'}],people:['Лера','наставник в банке Алексей'],tags:['работа','новые-отношения','учёба']},
+    2003:{ev:[{c:'org',t:'Расстался с Лерой'},{c:'gry',t:'Депрессивный период, замкнулся'},{c:'blu',t:'Заинтересовался стартапами'},{c:'org',t:'Первый раз поехал за границу один'},{c:'grn',t:'Выиграл именную стипендию'},{c:'pnk',t:'Брат Денис женился — был свидетелем'}],people:['Лера','Денис (брат)','жена брата Оля'],tags:['расставание','стартапы','семья-расширяется']},
+    2004:{ev:[{c:'grn',t:'Диплом с отличием'},{c:'blu',t:'Первая работа — junior-разработчик'},{c:'org',t:'Снял первую квартиру с Кириллом'},{c:'yel',t:'Купил первый ноутбук — был восторг'},{c:'pnk',t:'Дима женился — был свидетелем'},{c:'lila',t:'Первое собеседование за границей — отказали'}],people:['Кирилл','Дима','тимлид Антон'],tags:['выпуск-универа','первая-работа','новая-глава'],tone:'Точка перехода во взрослую жизнь. Профессия определилась, начинаю зарабатывать самостоятельно — впервые ощущение «я сам».'},
+    2005:{ev:[{c:'grn',t:'Продвижение в middle-разработчика'},{c:'pnk',t:'Отдал первую долю родителям на ремонт'},{c:'org',t:'Большая поездка — Юго-Восточная Азия'},{c:'blu',t:'Начал вести блог о технологиях'},{c:'lila',t:'Стал ментором двух джунов'}],people:['Кирилл','Антон (тимлид)','родители'],tags:['рост','путешествия','блог']},
+    2006:{ev:[{c:'org',t:'Релокация в Питер с командой'},{c:'yel',t:'Купил первую машину'},{c:'org',t:'Поссорился с Кириллом из-за денег'},{c:'pnk',t:'Нашёл наставника — старший разработчик Денис'},{c:'blu',t:'Углубился в архитектуру систем'},{c:'gry',t:'Сильно тосковал по Москве'}],people:['Кирилл (поссорились)','Денис-наставник'],tags:['переезд','новый-город','наставник'],tone:'Первый раз в жизни — сам в новом городе, без привычной поддержки. Адаптация трудная, но именно тут начинается отдельность.'},
+    2007:{ev:[{c:'grn',t:'Сотрудник года в компании'},{c:'lila',t:'Первая публичная конференция — выступил'},{c:'pnk',t:'Открыл стартаперский клуб в Питере'},{c:'yel',t:'Первая большая премия — отложил на квартиру'},{c:'org',t:'Перестал общаться с родителями полгода'},{c:'blu',t:'Прочитал «Atlas Shrugged» — спорил с миром'}],people:['Денис-наставник','родители (молчание)'],tags:['признание','публичность','конфликт-семья']},
+    2008:{ev:[{c:'gry',t:'Финансовый кризис, увольнения вокруг'},{c:'grn',t:'Свою позицию удержал'},{c:'pnk',t:'Помогал бывшим коллегам устраиваться'},{c:'yel',t:'Купил первую квартиру в ипотеку'},{c:'org',t:'Помирился с родителями'},{c:'pnk',t:'Кирилл переехал в Питер, стали видеться'}],people:['Кирилл (помирились)','родители'],tags:['кризис-внешний','покупка-квартиры','примирение']},
+    2009:{ev:[{c:'pnk',t:'Знакомство с Алисой на конференции'},{c:'grn',t:'Прошёл первый марафон'},{c:'org',t:'Уволился — пошёл в новую команду'},{c:'blu',t:'Прочитал «Lean Startup»'},{c:'pnk',t:'Алиса переехала к нему через полгода'}],people:['Алиса','команда'],tags:['встреча-судьбы','смена-работы','спорт'],tone:'Год встречи. С Алисой — сразу всерьёз, без долгого ухаживания.'},
+    2010:{ev:[{c:'pnk',t:'Свадьба'},{c:'yel',t:'Ипотека на однушку'},{c:'pnk',t:'Медовый месяц — Италия'},{c:'org',t:'Сложный период адаптации Алисы к Москве'},{c:'gry',t:'Полгода с тревожным расстройством, психотерапия'},{c:'gry',t:'Денис-наставник уехал в Канаду — потеря живого общения'}],people:['Алиса (жена)','Денис-наставник','Денис (брат)'],tags:['свадьба','адаптация','психотерапия'],tone:'Год начала — свадьба, новая семейная конфигурация. Параллельно — внутренние сбои от темпа изменений.'},
+    2011:{ev:[{c:'grn',t:'Свой первый стартап с двумя друзьями'},{c:'org',t:'Уволился из найма'},{c:'gry',t:'Тяжёлая адаптация к статусу основателя'},{c:'pnk',t:'Восстановился — спорт, психотерапия'},{c:'lila',t:'Первая инвесторская встреча в США'},{c:'org',t:'Конфликты с Алисой из-за перегрузок'}],people:['Сергей (cofounder)','Антон (cofounder)','Алиса'],tags:['свой-бизнес','перезагрузка','перегрузка']},
+    2012:{ev:[{c:'org',t:'Первый раунд инвестиций'},{c:'grn',t:'Команда выросла до 8 человек'},{c:'lila',t:'Первая публикация в профильном издании'},{c:'pnk',t:'Алиса начала свой образовательный проект'},{c:'blu',t:'Переехали в Сан-Франциско на 4 месяца'},{c:'gry',t:'Продал первую квартиру в Питере'}],people:['Алиса','Сергей','Антон','инвестор Марк'],tags:['инвестиции','команда','SF']},
+    2013:{ev:[{c:'org',t:'Стартап закрылся — продукт не нашёл рынка'},{c:'gry',t:'Долги перед инвесторами'},{c:'org',t:'Развод с Алисой стоял на грани, но не случился'},{c:'gry',t:'Дикая усталость и апатия, снова терапия'},{c:'pnk',t:'Помирился с сооснователями'},{c:'blu',t:'Переосмыслил провал'}],people:['Алиса','Сергей','Антон','психотерапевт Михаил'],tags:['провал','кризис-в-семье','перезагрузка'],tone:'Тёмный год — стартап провалился, отношения на нерве, долги. Но именно тут — точка, после которой я стал собирать себя по другим принципам.'},
+    2014:{ev:[{c:'blu',t:'Перешёл в продуктовый менеджмент в крупной IT-компании'},{c:'yel',t:'Стабильная зарплата, выплачиваем долги'},{c:'blu',t:'Углубился в системный дизайн'},{c:'pnk',t:'Алиса беременна'},{c:'pnk',t:'Помирились окончательно — трудный год сблизил'},{c:'lila',t:'Начал вести блог про продуктовый менеджмент'}],people:['Алиса','новый CEO Михаил'],tags:['возврат-в-найм','восстановление','блог']},
+    2015:{ev:[{c:'pnk',t:'Родился сын Артём'},{c:'yel',t:'Купили трёшку в Подмосковье'},{c:'pnk',t:'Алиса ушла в декрет'},{c:'lila',t:'Открыл свой подкаст про продукты'},{c:'gry',t:'Кризис среднего возраста начался раньше графика'},{c:'org',t:'Сменил психотерапевта — пошёл к коучу'}],people:['Артём (сын)','Алиса','Денис (брат)'],tags:['рождение-сына','новое-жильё','смена-практики'],tone:'Рождение сына — тон огромной благодарности и новой ответственности.'},
+    2016:{ev:[{c:'grn',t:'Возглавил продуктовую команду — 6 человек'},{c:'grn',t:'Защитил первую большую фичу с CFO'},{c:'pnk',t:'Артём начал ходить'},{c:'org',t:'Серьёзный конфликт с CEO — рассматривал уход'},{c:'blu',t:'Стал писать первую книгу — не закончил'},{c:'lila',t:'Запустил мини-курс — 60 человек'}],people:['CEO Михаил','Кирилл','Артём'],tags:['руководство','конфликт','родительство']},
+    2017:{ev:[{c:'grn',t:'Повышение до head of product'},{c:'lila',t:'Первая большая конференция в Европе — выступил'},{c:'pnk',t:'Открыл наставническую практику'},{c:'yel',t:'Закрыл ипотеку досрочно'},{c:'pnk',t:'Долгий разговор с Денисом-наставником'},{c:'blu',t:'Поменял смотрение на людей'}],people:['Денис-наставник','Артём','подопечные'],tags:['head-of-product','наставничество','рост']},
+    2018:{ev:[{c:'org',t:'Уволился. Открыл свой консалтинг'},{c:'yel',t:'Первый клиент — старый знакомый Кирилл'},{c:'pnk',t:'Купили дом за городом'},{c:'lila',t:'Первое выступление на TEDx'},{c:'blu',t:'Курс по продуктовому мышлению — 200 человек'},{c:'pnk',t:'Артём пошёл в детский сад'}],people:['Кирилл (первый клиент)','Алиса','Артём'],tags:['свой-консалтинг','TEDx','новая-глава'],tone:'Точка большой смелости. После всех провалов — снова в самостоятельный путь, но уже с другим запасом мудрости.'},
+    2019:{ev:[{c:'grn',t:'Команда из 3 консультантов'},{c:'yel',t:'Заработали первый миллион за год'},{c:'pnk',t:'Артём пошёл в первый класс'},{c:'lila',t:'Запустил YouTube — за полгода 10к подписчиков'},{c:'org',t:'Мать тяжело болела — восстановление 4 месяца'},{c:'blu',t:'Стал читать философию — стоики'}],people:['мать','Артём','Алиса','команда'],tags:['рост-бизнеса','семейная-тревога']},
+    2020:{ev:[{c:'gry',t:'Covid. Потеря половины клиентов за 3 месяца'},{c:'org',t:'Перевёл всё в онлайн'},{c:'org',t:'Алиса заболела, восстановилась'},{c:'gry',t:'Финансовый кризис в семье — продали машину'},{c:'blu',t:'Прочитал 30 книг'},{c:'pnk',t:'Сильно сблизились с Артёмом — все дома'},{c:'lila',t:'Начал медитировать каждое утро'}],people:['Алиса','Артём','клиенты ушедшие'],tags:['covid','внешний-кризис','новые-привычки'],tone:'Принудительная пауза — мир остановился, я остановился. Из кризиса вышел другим человеком.'},
+    2021:{ev:[{c:'yel',t:'Перенастройка — фокус на B2B'},{c:'lila',t:'Запустил курс для продуктовых менеджеров — 400 человек'},{c:'pnk',t:'Помирился с Кириллом после 13 лет молчания'},{c:'grn',t:'Доход вырос на 60% к 2019'},{c:'org',t:'Первый раз был в коучинге как клиент'},{c:'pnk',t:'Алиса получила диплом учителя'}],people:['Кирилл (помирились)','Алиса','коуч Сергей'],tags:['перенастройка','коучинг','примирение']},
+    2022:{ev:[{c:'grn',t:'Команда выросла до 4 человек'},{c:'yel',t:'Первый клиент с MRR > 50k'},{c:'pnk',t:'Артём перешёл в новую школу'},{c:'lila',t:'Стал коучем — личная сертификация'},{c:'gry',t:'Серьёзный разговор с собой о следующих 10 годах'},{c:'org',t:'Релокация всей семьи в новую страну'}],people:['Алиса','Артём'],tags:['релокация','коуч','рост-бизнеса']},
+    2023:{ev:[{c:'org',t:'Открыл второй офис'},{c:'lila',t:'Подписал крупного зарубежного клиента'},{c:'pnk',t:'Алиса начала свой проект — учительство'},{c:'grn',t:'Доход пробил планку, к которой шёл 5 лет'},{c:'gry',t:'Стал замечать, что бегу не туда'},{c:'org',t:'Депрессивный месяц — обратился к психотерапевту'}],people:['Алиса','команда','психотерапевт'],tags:['пик-карьеры','внутренний-вопрос','тревожный-сигнал'],tone:'Парадоксальный год — внешне всё на пике, внутри впервые после 2013 ощущение, что не туда. Это сигнал к трансформации.'},
+    2024:{ev:[{c:'lila',t:'8 человек, 14 постоянных клиентов'},{c:'org',t:'Размышляю о следующей трансформации'},{c:'pnk',t:'Артёму 9 лет, увлёкся программированием'},{c:'grn',t:'Принял решение собрать своё Видение'},{c:'blu',t:'Иду на интенсив у Дмитрия Филиппова'},{c:'pnk',t:'Алиса предлагает совместный проект'}],people:['Алиса','Артём','Дмитрий Филиппов'],tags:['точка-выбора','интенсив','новая-глава'],tone:'Стою на пороге. Внешне всё хорошо, но внутри пора пересобрать стратегию.'},
+    2025:{ev:[{c:'grn',t:'Прошёл интенсив — собрано Видение и стратегический агент'},{c:'blu',t:'Развернул свою AI-операционку: ежедневный капитанский мостик'},{c:'org',t:'Отказ от двух крупных клиентов, не совпадающих с Видением'},{c:'lila',t:'Запустил пилот нового продукта'},{c:'yel',t:'Впервые за 3 года появилось ощущение «куда»'}],people:['Алиса','Артём','Дмитрий-наставник'],tags:['переосмысление','AI-операционка','сужение-фокуса'],tone:'Год переосмысления. Внешнее становится уже и осознаннее, а энергия наконец потекла.'},
+    2026:{ev:[{c:'grn',t:'Запустил собственный формат интенсива по своей методике'},{c:'lila',t:'Провёл 3 пилотных интенсива — два кейса в портфолио'},{c:'yel',t:'Команда консалтинга — 4 человека, фокус на 5 клиентах'},{c:'org',t:'Продали дом, переехали в большую квартиру в центре'},{c:'pnk',t:'Артёму 11, поступил в физмат-школу'},{c:'pnk',t:'С Алисой две недели в Японии'},{c:'blu',t:'Начал писать книгу про сюжетные Арки'}],people:['Алиса','Артём','когорта интенсива','команда'],tags:['реализация','новый-продукт','семья','книга'],tone:'Реализация накопленного. Не тороплюсь, действую из Видения, не из тревоги. Ощущение, что наконец-то на своей траектории.'}
+  }
+};
+let selYear=2026;
+function ageWord(n){const m=n%10,h=n%100;if(h>=11&&h<=14)return 'лет';if(m===1)return 'год';if(m>=2&&m<=4)return 'года';return 'лет';}
+function getEv(y){return TL.events[y]||null;}
+function renderBoard(){
+  const grid=document.getElementById('sheetGrid');if(!grid)return;
+  let html='';const total=TL.decadesCount*10;
+  for(let i=0;i<total;i++){
+    const year=TL.startDecade+i;
+    const data=getEv(year);
+    const events=data?data.ev:[];
+    const buckets={sp:'',su:'',au:'',wi:''};
+    events.slice(0,8).forEach((e,idx)=>{
+      const seasonIdx=(e.t.charCodeAt(Math.min(2,e.t.length-1))+idx*5)%4;
+      buckets[['sp','su','au','wi'][seasonIdx]]+='<span class="dot '+e.c+'"></span>';
+    });
+    const isFuture=events.length===0;
+    html+='<div class="yc'+(isFuture?' future':'')+(year===selYear?' active':'')+'" data-year="'+year+'">'
+      +'<div class="y-num">'+year+'</div>'
+      +'<div class="seasons"><div class="season">'+buckets.sp+'</div><div class="season">'+buckets.su+'</div><div class="season">'+buckets.au+'</div><div class="season">'+buckets.wi+'</div></div>'
+      +'</div>';
+  }
+  grid.innerHTML=html;
+}
+function syncHistHeight(){
+  const wrap=document.querySelector('.histwrap');if(!wrap)return;
+  const left=wrap.querySelector('.h-left'),right=wrap.querySelector('.h-right');
+  if(!left||!right)return;
+  if(window.matchMedia('(max-width:760px)').matches){right.style.height='';return;}
+  right.style.height=left.offsetHeight+'px';
+}
+const sheetGrid=document.getElementById('sheetGrid');
+if(sheetGrid){
+  renderBoard();
+  syncHistHeight();
+  window.addEventListener('resize',syncHistHeight);
+  window.addEventListener('load',syncHistHeight);
+  setTimeout(syncHistHeight,300);setTimeout(syncHistHeight,1500);
+  sheetGrid.addEventListener('click',e=>{
+    const cell=e.target.closest('.yc');if(!cell)return;
+    selYear=parseInt(cell.dataset.year,10);
+    sheetGrid.querySelectorAll('.yc').forEach(c=>c.classList.toggle('active',parseInt(c.dataset.year,10)===selYear));
+    openYearDoc(selYear);
+  });
+}
+function openYearDoc(year){
+  const data=getEv(year);const age=year-TL.birthYear;const filename='history/'+year+'.md';
+  let inner;
+  if(!data){
+    inner='<div class="fn"><span>▢</span>'+filename+'</div>'
+      +'<h3 class="t"><span class="h">#</span>'+year+'</h3>'
+      +'<div class="sub">'+TL.name+' — '+age+' '+ageWord(age)+'</div>'
+      +'<p class="l">'+(year>2026?'Ещё впереди — пустая страница.':'В этот год записей пока нет.')+'</p>';
+  }else{
+    const tagsLine=(data.tags&&data.tags.length)?'\n<span class="k">tags:</span> <span class="d">[</span><span class="v">'+esc(data.tags.join(', '))+'</span><span class="d">]</span>':'';
+    const fm='<span class="d">---</span>\n<span class="k">year:</span> <span class="v">'+year+'</span>\n<span class="k">age:</span> <span class="v">'+age+'</span>'+tagsLine+'\n<span class="d">---</span>';
+    const ev=data.ev.map(e=>'<li><span class="dot '+e.c+'"></span>'+esc(e.t)+'</li>').join('');
+    const people=(data.people&&data.people.length)?'<h4 class="s"><span class="h">##</span>Люди</h4><ul class="li">'+data.people.map(p=>'<li>'+esc(p)+'</li>').join('')+'</ul>':'';
+    const tone=data.tone?'<h4 class="s"><span class="h">##</span>Тон года</h4><div class="tone">'+esc(data.tone)+'</div>':'';
+    inner='<div class="fn"><span>▢</span>'+filename+'</div>'
+      +'<div class="fm">'+fm+'</div>'
+      +'<h3 class="t"><span class="h">#</span>'+year+'</h3>'
+      +'<div class="sub">'+TL.name+' — '+age+' '+ageWord(age)+'</div>'
+      +'<h4 class="s"><span class="h">##</span>События</h4><ul class="ev">'+ev+'</ul>'
+      +people+tone;
+  }
+  const ov=document.createElement('div');ov.className='ydoc-ov';
+  ov.innerHTML='<div class="ydoc-modal" role="dialog" aria-label="документ года '+year+'"><button class="x" aria-label="Закрыть">×</button>'+inner+'</div>';
+  document.body.appendChild(ov);
+  const close=()=>ov.remove();
+  ov.addEventListener('click',e=>{if(e.target===ov)close();});
+  ov.querySelector('.x').addEventListener('click',close);
+  const onEsc=e=>{if(e.key==='Escape'){close();document.removeEventListener('keydown',onEsc);}};
+  document.addEventListener('keydown',onEsc);
+}
+</script>
+</body>
+</html>
