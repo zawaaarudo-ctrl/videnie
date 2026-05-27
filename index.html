@@ -256,6 +256,24 @@ footer .att{color:var(--brass-deep);font-family:'Hanken Grotesk',sans-serif;font
 .ydoc-modal ul.ev li .dot{position:absolute;left:0;top:6px;width:9px;height:6px;border-radius:1px}
 .ydoc-modal .tone{font-size:14px;color:var(--ink-soft);font-style:italic;line-height:1.55;border-left:3px solid var(--brass);padding-left:14px;margin-top:6px}
 @media(max-width:760px){.histwrap{grid-template-columns:1fr}.histwrap .h-right{height:auto!important}.sheet-grid{overflow:visible}}
+/* мобильная адаптация (десктоп не трогаем) */
+@media(max-width:760px){
+  .grid-3{grid-template-columns:1fr}
+  .sec-num{font-size:42px;top:-2px}
+}
+@media(max-width:560px){
+  .wrap{padding:0 18px}
+  .sheet-grid{grid-template-columns:repeat(5,1fr)}
+  .sheet{padding:16px 12px 14px}
+  .sec-num{font-size:32px;opacity:.5}
+  header{padding:54px 0 26px}
+  section{padding:48px 0}
+  header h1{font-size:29px;line-height:1.14}
+  .hero-sub{font-size:18px}
+  .anchor .formula .lead{font-size:24px}
+  .anchor .formula{max-width:100%}
+  h2{font-size:25px}
+}
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s cubic-bezier(.2,.7,.2,1)}
 .reveal.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
